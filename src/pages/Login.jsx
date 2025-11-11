@@ -1,87 +1,106 @@
-import { useState, useMemo } from 'react'
-import styles from '../styles/Login.module.css'
-import { Link, useNavigate } from 'react-router-dom'
+import { useState, useMemo } from 'react';
+import styles from '../styles/Login.module.css'; // Importamos los estilos de la página de login
+import { Link, useNavigate } from 'react-router-dom'; // Importamos Link para navegación y useNavigate para redirigir
+import { useUsers } from '../components/utils'
+// Definimos las claves para el almacenamiento en localStorage
+const LS_LOGGED_KEY = 'pms_logged_user';  // Clave para almacenar al usuario logueado
 
-const LS_USERS_KEY = 'pms_users'
-const LS_LOGGED_KEY = 'pms_logged_user'
 
-function useUsers() {
-  return useMemo(() => {
-    try { return JSON.parse(localStorage.getItem(LS_USERS_KEY)) || [] }
-    catch { return [] }
-  }, [])
-}
-
+// Componente principal del Login
 export default function Login() {
-  const users = useUsers()
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [showPass, setShowPass] = useState(false)
-  const navigate = useNavigate()
+  const users = useUsers(); // Obtenemos los usuarios desde el hook useUsers
+  const [email, setEmail] = useState(''); // Estado para el correo electrónico
+  const [password, setPassword] = useState(''); // Estado para la contraseña
+  const [showPass, setShowPass] = useState(false); // Estado para controlar la visibilidad de la contraseña
+  const navigate = useNavigate(); // Función para navegar entre rutas
 
+  // Función que maneja el envío del formulario
   const handleSubmit = (e) => {
-    e.preventDefault()
-    const mail = (email || '').trim().toLowerCase()
-    if (!mail || !password) { alert('Completa correo y contraseña.'); return }
+    e.preventDefault(); // Prevenimos el comportamiento predeterminado del formulario
+    const mail = (email || '').trim().toLowerCase(); // Limpiamos y convertimos el correo a minúsculas
 
-    const user = users.find(u => u.email?.toLowerCase() === mail)
-    if (!user) { alert('Ese correo no está registrado.'); return }
-    if (user.pass !== password) { alert('Contraseña incorrecta.'); return }
+    // Verificamos que los campos de correo y contraseña no estén vacíos
+    if (!mail || !password) {
+      alert('Completa correo y contraseña.');
+      return;
+    }
 
-    localStorage.setItem(LS_LOGGED_KEY, JSON.stringify({ email: user.email, nombre: user.nombre }))
-    navigate('/home', { replace: true })
-  }
+    // Buscamos al usuario en la lista de usuarios
+    const user = users.find(u => u.email?.toLowerCase() === mail);
+    
+    // Si el correo no está registrado, mostramos un mensaje de error
+    if (!user) {
+      alert('Ese correo no está registrado.');
+      return;
+    }
+
+    // Si la contraseña no es correcta, mostramos un mensaje de error
+    if (user.pass !== password) {
+      alert('Contraseña incorrecta.');
+      return;
+    }
+
+    // Si las credenciales son correctas, guardamos al usuario en el localStorage y navegamos a /home
+    localStorage.setItem(LS_LOGGED_KEY, JSON.stringify({ email: user.email, nombre: user.nombre }));
+    navigate('/home', { replace: true }); // Redirigimos al usuario a la página de inicio, reemplazando la ruta actual
+  };
 
   return (
     <div className={styles.main}>
       <div className={styles.contenedor_login}>
-        <div className={styles.logo} />
-        <h1 className={styles.titulo}>Iniciar Sesión</h1>
+        <div className={styles.logo} /> {/* Logo del login */}
+        <h1 className={styles.titulo}>Iniciar Sesión</h1> {/* Título principal de la página */}
 
         <div className={styles.caja}>
+          {/* Formulario de inicio de sesión */}
           <form id="login-form" onSubmit={handleSubmit}>
+            {/* Campo para el correo electrónico */}
             <label htmlFor="email">Correo electrónico</label>
             <input
               type="email"
               id="email"
               placeholder="Ingrese su correo electrónico"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)} // Actualiza el estado de email
               required
             />
 
+            {/* Campo para la contraseña */}
             <label htmlFor="password">Contraseña</label>
             <div className={styles.input_pass}>
               <input
-                type={showPass ? 'text' : 'password'}
+                type={showPass ? 'text' : 'password'} // Si showPass es true, mostramos la contraseña en texto
                 id="password"
                 placeholder="Ingrese su contraseña"
-                minLength={8}
-                maxLength={20}
+                minLength={8} // Requiere un mínimo de 8 caracteres
+                maxLength={20} // Requiere un máximo de 20 caracteres
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(e) => setPassword(e.target.value)} // Actualiza el estado de password
                 required
               />
+              {/* Icono para alternar la visibilidad de la contraseña */}
               <i
                 id="togglePass"
-                className={`fa-solid ${showPass ? 'fa-eye' : 'fa-eye-slash'}`}
-                onClick={() => setShowPass(s => !s)}
-                aria-label={showPass ? 'Ocultar contraseña' : 'Mostrar contraseña'}
-                title={showPass ? 'Ocultar contraseña' : 'Mostrar contraseña'}
-                role="button"
-                tabIndex={0}
-                onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && setShowPass(s => !s)}
+                className={`fa-solid ${showPass ? 'fa-eye' : 'fa-eye-slash'}`} // Cambia el ícono de ojo dependiendo de la visibilidad
+                onClick={() => setShowPass(s => !s)} // Al hacer click alternamos el estado de showPass
+                aria-label={showPass ? 'Ocultar contraseña' : 'Mostrar contraseña'} // Atributo accesible para lectores de pantalla
+                title={showPass ? 'Ocultar contraseña' : 'Mostrar contraseña'} // Título del ícono
+                role="button" // Indicamos que el ícono es un botón
+                tabIndex={0} // Permite que el ícono sea accesible por teclado
+                onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && setShowPass(s => !s)} // Alterna la visibilidad con Enter o Space
               />
             </div>
 
+            {/* Botón para enviar el formulario */}
             <button type="submit" className={styles.btn}>Ingresar</button>
           </form>
 
+          {/* Link a la página de registro */}
           <p className={styles.ayuda}>
             ¿No tienes una cuenta? <Link to="/registro">Regístrate</Link>
           </p>
         </div>
       </div>
     </div>
-  )
+  );
 }
