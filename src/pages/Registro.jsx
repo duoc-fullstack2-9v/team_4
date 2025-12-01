@@ -3,6 +3,8 @@ import styles from '../styles/Registro.module.css'; // Importamos los estilos de
 import { Link, useNavigate } from 'react-router-dom'; // Importamos Link para navegación y useNavigate para redirigir
 import { useUsers } from '../components/utils'
 
+const LS_KEY = 'pms_users';
+
 // Componente principal para el registro de usuarios
 export default function Register() {
     const users = useUsers(); // Obtenemos los usuarios actuales desde el localStorage
@@ -34,21 +36,21 @@ export default function Register() {
         let ok = true; // Variable para verificar si todo está correcto
 
         // Validación del campo nombre
-        if (!nombre.trim()) { 
-            setError('nombre', 'El nombre es obligatorio'); 
-            ok = false; 
+        if (!nombre.trim()) {
+            setError('nombre', 'El nombre es obligatorio');
+            ok = false;
         } else setOK('nombre');
 
         // Validación del campo email
         const mail = (email || '').trim().toLowerCase();
-        if (!mail) { 
-            setError('email', 'El correo es obligatorio'); 
-            ok = false; 
+        if (!mail) {
+            setError('email', 'El correo es obligatorio');
+            ok = false;
         } else {
             const domain = (mail.split('@')[1] || '');
-            if (!allowDomains.includes(domain)) { 
-                setError('email', 'Dominio no permitido'); 
-                ok = false; 
+            if (!allowDomains.includes(domain)) {
+                setError('email', 'Dominio no permitido');
+                ok = false;
             } else setOK('email');
         }
 
@@ -65,15 +67,15 @@ export default function Register() {
         } else setOK('codigo');
 
         // Validación del campo contraseña
-        if (pass.length < 8 || pass.length > 20) { 
-            setError('pass', 'Contraseña 8 a 20 caracteres'); 
-            ok = false; 
+        if (pass.length < 8 || pass.length > 20) {
+            setError('pass', 'Contraseña 8 a 20 caracteres');
+            ok = false;
         } else setOK('pass');
 
         // Validación de confirmación de contraseña
-        if (confirm !== pass) { 
-            setError('confirm', 'Las contraseñas no coinciden'); 
-            ok = false; 
+        if (confirm !== pass) {
+            setError('confirm', 'Las contraseñas no coinciden');
+            ok = false;
         } else setOK('confirm');
 
         // Si algún campo no es válido, no se continúa con el registro
@@ -90,7 +92,7 @@ export default function Register() {
         localStorage.setItem(LS_KEY, JSON.stringify(newUsers)); // Guardamos los usuarios actualizados
         alert('Cuenta creada correctamente.'); // Mostramos un mensaje de éxito
         navigate('/login', { replace: true }); // Redirigimos a la página de login
-    };
+    }
 
     return (
         <div className={styles.main}>

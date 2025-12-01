@@ -4,7 +4,7 @@ import ListaProductos from "./ListaProductos"
 
 function Main(props) {
     return (<main>
-        {props.showHero && <Hero/>}
+        {props.showHero && <Hero isLoggedIn={props.isLoggedIn}/>}
         {props.productos.map((item, index) =>(
             <ListaProductos key = {index} productos = {item}></ListaProductos>
         ))}

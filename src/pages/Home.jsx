@@ -14,7 +14,7 @@ import tortaSinAzucarnaranja from "../assets/Orange Cake with Zesty Cream Cheese
 import cheesecakeSinAzucar from "../assets/Cheesecake Factory Cheesecake.jpg";
 
 // Componente principal de la página de inicio
-function Home(){
+function Home({isLoggedIn}){
 
     // Definimos el primer grupo de productos: tortas clásicas
     const productos1 = [
@@ -45,7 +45,7 @@ function Home(){
     return (
         <>
             <Nav /> {/* Barra de navegación */}
-            <Main showHero={true} productos={productos} /> {/* Mostramos los productos en el componente Main */}
+            <Main showHero={true} productos={productos} isLoggedIn={isLoggedIn} /> {/* Mostramos los productos en el componente Main */}
             <Footer /> {/* Pie de página */}
         </>
     );

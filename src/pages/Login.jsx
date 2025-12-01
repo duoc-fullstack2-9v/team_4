@@ -7,7 +7,7 @@ const LS_LOGGED_KEY = 'pms_logged_user';  // Clave para almacenar al usuario log
 
 
 // Componente principal del Login
-export default function Login() {
+export default function Login({ onLogin }) {
   const users = useUsers(); // Obtenemos los usuarios desde el hook useUsers
   const [email, setEmail] = useState(''); // Estado para el correo electrónico
   const [password, setPassword] = useState(''); // Estado para la contraseña
@@ -27,7 +27,7 @@ export default function Login() {
 
     // Buscamos al usuario en la lista de usuarios
     const user = users.find(u => u.email?.toLowerCase() === mail);
-    
+
     // Si el correo no está registrado, mostramos un mensaje de error
     if (!user) {
       alert('Ese correo no está registrado.');
@@ -42,8 +42,15 @@ export default function Login() {
 
     // Si las credenciales son correctas, guardamos al usuario en el localStorage y navegamos a /home
     localStorage.setItem(LS_LOGGED_KEY, JSON.stringify({ email: user.email, nombre: user.nombre }));
-    navigate('/home', { replace: true }); // Redirigimos al usuario a la página de inicio, reemplazando la ruta actual
-  };
+    if (typeof onLogin === 'function') {
+      onLogin();
+
+      // 4. Redirigir a /home
+      navigate('/home', { replace: true });
+    }
+  }
+
+
 
   return (
     <div className={styles.main}>
