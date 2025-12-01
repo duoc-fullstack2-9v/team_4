@@ -53,11 +53,11 @@ describe("<Footer />", () => {
   it("renderiza 8 categorías como <a> sin href", () => {
   const { container } = setup();
 
-  // Contenedor lateral donde están las categorías (ajusta si tu clase cambia)
+  // Contenedor lateral donde están las categorías
   const side = container.querySelector(".side_name");
   expect(side).toBeInTheDocument();
 
-  // Anclas directas (no usan rol link si no tienen href)
+  // Anclas directas
   const anchors = side.querySelectorAll("a");
   expect(anchors.length).toBe(8);
 
