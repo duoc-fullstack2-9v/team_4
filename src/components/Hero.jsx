@@ -5,10 +5,6 @@ import styles from "../styles/Index.module.css"
 function Hero() {
     
     return <div className={styles.hero}>
-        <ul className={styles.hero_links}>
-            <li><a href="/login">Inicio de Sesion</a></li>
-            <li><a href="/registro">Registro</a> |</li>
-        </ul>
         <div className="hero_content">
             <div className={styles.contenedor_cuadrado}>
                 <div className={styles.cuadrado_principal}>

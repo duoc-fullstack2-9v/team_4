@@ -1,5 +1,6 @@
 import Nav from "../components/Nav";
 import Main from "../components/Main";
+import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
 import torta2Chocolate from "../assets/torta cuadrada chocolate.jpg"
 import torta2Frutas from "../assets/torta cuadrada de frutas.jpg"
