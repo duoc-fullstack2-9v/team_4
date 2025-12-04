@@ -1,4 +1,3 @@
-// src/pages/AdminProductos.jsx
 import { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom"; // Importamos useNavigate
 import Nav from "../components/Nav";
@@ -19,9 +18,18 @@ function AdminProductos() {
     const cargarProductos = async () => {
       try {
         setCargando(true);
-        const data = await fetchProducts();
-        setProductos(data);
-        setError(null);
+        const data = await fetchProducts(); // Obtener productos desde el backend
+        console.log('Respuesta de la API:', data); // Agregar un log para verificar la respuesta
+
+        const productosArray = Array.isArray(data) ? data : (data && Array.isArray(data.productos)) ? data.productos : [];
+
+        if (productosArray.length > 0 || Array.isArray(data)) {
+          setProductos(productosArray);
+        } else {
+          setError("Los datos de productos no están en el formato correcto o no hay productos.");
+          setProductos([]); // Asegurarse de que productos sea un arreglo vacío
+        }
+
       } catch (err) {
         console.error(err);
         setError("No se pudieron cargar los productos");
@@ -45,6 +53,11 @@ function AdminProductos() {
       console.error(err);
       alert("Error al eliminar el producto");
     }
+  };
+
+  // Función para redirigir a la página de editar producto
+  const handleEditarProducto = (id) => {
+    navigate(`/editarProducto/${id}`);  // Redirige a la página de editar producto
   };
 
   // Función para redirigir a la página de agregar producto
@@ -86,6 +99,9 @@ function AdminProductos() {
                       <td>{p.precio}</td>
                       <td>{p.stock}</td>
                       <td>
+                        <button className={styles.button} onClick={() => handleEditarProducto(p.id)}>
+                          Editar
+                        </button>
                         <button className={styles.button} onClick={() => handleEliminar(p.id)}>
                           Eliminar
                         </button>

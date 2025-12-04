@@ -208,3 +208,57 @@ footer {
     p { color: #B0BEC5; }
     a { color: #B0BEC5; }
 }*/
+
+/* === ESTILOS PARA FORMULARIOS (Agregar/Editar) === */
+
+.formContainer {
+  background-color: #fff1e1;
+  padding: 20px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #6c4f4f;
+}
+
+.input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+  color: #6c4f4f;
+  background-color: #f9f9f9;
+  box-sizing: border-box; /* Asegura que el padding no afecte el ancho total */
+}
+
+/* El estilo de .btn ya existe, pero podemos ajustarlo si es necesario.
+   Asegurémonos que el .btn existente funciona bien en este contexto. */
+
+.btnCerrar {
+  width: 100%;
+  padding: 12px;
+  background-color: #f1c7c7;
+  color: #6c4f4f;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.btn:hover {
+  background-color: #d44a4a;
+}
+
+.btnCerrar:hover {
+  background-color: #e69f9f;
+}

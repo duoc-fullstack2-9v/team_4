@@ -13,7 +13,10 @@ function AdminUsuarios() {
   const [error, setError] = useState(null);
   const navigate = useNavigate(); // Hook para la navegación
 
-
+  // Función para redirigir a la página de editar usuario
+  const handleEditarUsuario = (id) => {
+    navigate(`/editarUsuario/${id}`);  // Redirige a la página de editar usuario
+  };
 
   useEffect(() => {
     const cargarUsuarios = async () => {
@@ -85,6 +88,9 @@ function AdminUsuarios() {
                       <td>{u.nombre}</td>
                       <td>{u.email}</td>
                       <td>
+                        <button className={styles.button} onClick={() => handleEditarUsuario(u.id)}>
+                          Editar
+                        </button>
                         <button className={styles.button} onClick={() => handleEliminar(u.id)}>
                           Eliminar
                         </button>

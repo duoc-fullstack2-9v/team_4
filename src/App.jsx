@@ -8,6 +8,8 @@ import AdminUsuarios from "./pages/AdminUsuarios.jsx";
 import AdminProductos from "./pages/AdminProductos.jsx";
 import AgregarProducto from "./pages/AgregarProducto.jsx";
 import { AuthProvider } from "./context/AuthContext.jsx";
+import EditarProducto from './pages/EditarProducto.jsx'; 
+import EditarUsuario from './pages/EditarUsuario.jsx';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -28,6 +30,8 @@ function App() {
           <Route path="/adminUsuarios" element={<AdminUsuarios />}></Route>
           <Route path="/adminProductos" element={<AdminProductos />}></Route>
           <Route path="/agregarProducto" element={<AgregarProducto />} />
+          <Route path="/editarProducto/:id" element={<EditarProducto />} />
+          <Route path="/editarUsuario/:id" element={<EditarUsuario />} />
         </Routes>
       </BrowserRouter>
     </AuthProvider>
