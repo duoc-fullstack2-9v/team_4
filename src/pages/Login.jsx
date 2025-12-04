@@ -1,7 +1,8 @@
-import { useState, useMemo } from 'react';
+import { useState, useContext } from 'react';
 import styles from '../styles/Login.module.css'; // Importamos los estilos de la página de login
 import { Link, useNavigate } from 'react-router-dom'; // Importamos Link para navegación y useNavigate para redirigir
 import { useUsers } from '../components/utils'
+import { AuthContext } from '../context/AuthContext';
 // Definimos las claves para el almacenamiento en localStorage
 const LS_LOGGED_KEY = 'pms_logged_user';  // Clave para almacenar al usuario logueado
 
@@ -13,6 +14,7 @@ export default function Login({ onLogin }) {
   const [password, setPassword] = useState(''); // Estado para la contraseña
   const [showPass, setShowPass] = useState(false); // Estado para controlar la visibilidad de la contraseña
   const navigate = useNavigate(); // Función para navegar entre rutas
+  const { login } = useContext(AuthContext);
 
   // Función que maneja el envío del formulario
   const handleSubmit = (e) => {
@@ -40,14 +42,12 @@ export default function Login({ onLogin }) {
       return;
     }
 
-    // Si las credenciales son correctas, guardamos al usuario en el localStorage y navegamos a /home
-    localStorage.setItem(LS_LOGGED_KEY, JSON.stringify({ email: user.email, nombre: user.nombre }));
-    if (typeof onLogin === 'function') {
-      onLogin();
+    // Si las credenciales son correctas, guardamos al usuario en el AuthContext y localStorage
+    const userToLogin = { email: user.email, nombre: user.nombre };
+    login(userToLogin);  // Usamos el contexto para establecer al usuario como logueado
+    localStorage.setItem(LS_LOGGED_KEY, JSON.stringify(userToLogin));
 
-      // 4. Redirigir a /home
-      navigate('/home', { replace: true });
-    }
+    navigate('/home', { replace: true }); // Redirigimos al home
   }
 
 

@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom"; // Importar useNavigate
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
 import { fetchProducts, deleteProduct, createProduct } from "../services/productsApi";
+import { AuthContext } from '../context/AuthContext';
 
 function AdminProductos() {
+  const { isLoggedIn } = useContext(AuthContext);
   const [productos, setProductos] = useState([]);
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState(null);
@@ -27,11 +29,8 @@ function AdminProductos() {
       }
     };
 
-    // Solo cargar productos si el usuario está autenticado
-    if (JSON.parse(localStorage.getItem("currentUser"))) {
-      cargarProductos();
-    }
-  }, []);
+    cargarProductos();
+  }, [isLoggedIn, navigate]);
 
   const handleEliminar = async (id) => {
     const confirmar = window.confirm(
@@ -74,11 +73,7 @@ function AdminProductos() {
       alert("Error al crear producto");
     }
   };
-  
-  // Renderiza el contenido solo si el usuario es válido
-  if (!JSON.parse(localStorage.getItem("currentUser"))) {
-    return null; // O un spinner de carga mientras redirige
-  }
+
 
   return (
     <>

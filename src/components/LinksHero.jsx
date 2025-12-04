@@ -1,17 +1,21 @@
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import styles from "../styles/Index.module.css"
+import { AuthContext } from '../context/AuthContext';
+import React, { useContext } from 'react';
 
-function LinksHero(props){
+function LinksHero(){
+
+   const { isLoggedIn } = useContext(AuthContext);
 
     return (
     <ul className={styles.hero_links}>
-      {props.isLoggedIn ? (
+      {isLoggedIn ? (
         <>
           <li>
             <NavLink to="/adminUsuarios">Administrar usuarios</NavLink>
           </li>
           <li>
-            <NavLink to="/adminProductos">Administrar productos</NavLink>
+            <NavLink to="/adminProductos">Administrar productos |</NavLink>
           </li>
         </>
       ) : (

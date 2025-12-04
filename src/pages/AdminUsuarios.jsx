@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom"; // Importar useNavigate
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
 import { fetchUsers, deleteUser } from "../services/usersApi";
+import { AuthContext } from '../context/AuthContext';
 
 function AdminUsuarios() {
+  const { isLoggedIn } = useContext(AuthContext);
   const [usuarios, setUsuarios] = useState([]);
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState(null);
@@ -27,11 +29,8 @@ function AdminUsuarios() {
       }
     };
 
-    // Solo cargar usuarios si el usuario está autenticado
-    if (JSON.parse(localStorage.getItem("currentUser"))) {
-      cargarUsuarios();
-    }
-  }, []); // Dependencia vacía para que se ejecute una vez
+    cargarUsuarios();
+  }, [isLoggedIn, navigate]);
 
   const handleEliminar = async (id) => {
     const confirmar = window.confirm(
@@ -48,10 +47,6 @@ function AdminUsuarios() {
     }
   };
 
-  // Renderiza el contenido solo si el usuario es válido
-  if (!JSON.parse(localStorage.getItem("currentUser"))) {
-    return null; // O un spinner de carga mientras redirige
-  }
 
   return (
     <>
