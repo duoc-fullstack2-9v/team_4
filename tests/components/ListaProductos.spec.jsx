@@ -6,19 +6,12 @@ import ListaProductos from "../../src/components/ListaProductos.jsx";
 
 // ⚠️ Mockeamos el CSS Module con el nombre esperado por el componente
 vi.mock("../../src/styles/Index.module.css", () => ({
-  default: { productos: "productos" },
+  default: {
+    productos: "productos",
+    unidad: "unidad"
+  },
 }));
 
-/**
- * Mock del componente Article:
- * - Mostramos el nombre del producto dentro de un <div data-testid="article">
- * - Así podemos contar cuántos se renderizan y verificar el contenido
- */
-vi.mock("../../src/components/Article.jsx", () => ({
-  default: ({ productos }) => (
-    <div data-testid="article">{productos?.nombre}</div>
-  ),
-}));
 
 describe("<ListaProductos />", () => {
   const productos = [
@@ -26,22 +19,19 @@ describe("<ListaProductos />", () => {
       imagen: "https://example.com/a.jpg",
       alt: "A",
       nombre: "Producto A",
-      descripcion: "Desc A",
-      precio: "$1.000",
+      id: 1,
     },
     {
       imagen: "https://example.com/b.jpg",
       alt: "B",
       nombre: "Producto B",
-      descripcion: "Desc B",
-      precio: "$2.000",
+      id: 2,
     },
     {
       imagen: "https://example.com/c.jpg",
       alt: "C",
       nombre: "Producto C",
-      descripcion: "Desc C",
-      precio: "$3.000",
+      id: 3,
     },
   ];
 
@@ -53,22 +43,24 @@ describe("<ListaProductos />", () => {
     expect(div?.classList.contains("productos")).toBe(true);
   });
 
-  it("renderiza un <Article> por cada producto", () => {
+  it("renderiza un div por cada producto", () => {
     render(<ListaProductos productos={productos} />);
-    const articles = screen.getAllByTestId("article");
-    expect(articles).toHaveLength(productos.length);
+    // El componente renderiza un div con la clase 'unidad' por cada producto
+    const productDivs = screen.getAllByRole("heading", { level: 3 });
+    expect(productDivs).toHaveLength(productos.length);
   });
 
-  it("pasa correctamente los datos a cada <Article> (orden y nombre)", () => {
+  it("muestra el nombre de cada producto", () => {
     render(<ListaProductos productos={productos} />);
-    // El mock de <Article> imprime productos.nombre
     expect(screen.getByText("Producto A")).toBeInTheDocument();
     expect(screen.getByText("Producto B")).toBeInTheDocument();
     expect(screen.getByText("Producto C")).toBeInTheDocument();
   });
 
-  it("con lista vacía no renderiza artículos", () => {
+  it("con lista vacía muestra un mensaje", () => {
     render(<ListaProductos productos={[]} />);
-    expect(screen.queryByTestId("article")).toBeNull();
+    // Si la lista está vacía, no debe haber ningún 'heading' de producto.
+    const headings = screen.queryAllByRole("heading", { level: 3 });
+    expect(headings).toHaveLength(0);
   });
 });

@@ -75,7 +75,7 @@ describe("<Registro />", () => {
     expect(screen.getByLabelText(/Confirmar contraseña/i)).toBeInTheDocument();
 
 
-    expect(screen.getByRole("button", { name: /Regístrate/i }))
+    expect(screen.getByRole("button", { name: /Crear Cuenta/i }))
       .toBeInTheDocument();
 
 
@@ -90,7 +90,7 @@ describe("<Registro />", () => {
 
 
     // Enviar vacío
-    fireEvent.click(screen.getByRole("button", { name: /Regístrate/i }));
+    fireEvent.click(screen.getByRole("button", { name: /Crear Cuenta/i }));
 
 
     // Nombre obligatorio
@@ -115,7 +115,7 @@ describe("<Registro />", () => {
     });
 
 
-    fireEvent.click(screen.getByRole("button", { name: /Regístrate/i }));
+    fireEvent.click(screen.getByRole("button", { name: /Crear Cuenta/i }));
 
 
     expect(screen.getByText(/❌\s*Dominio no permitido/i)).toBeInTheDocument();
@@ -146,7 +146,7 @@ describe("<Registro />", () => {
     });
 
 
-    fireEvent.click(screen.getByRole("button", { name: /Regístrate/i }));
+    fireEvent.click(screen.getByRole("button", { name: /Crear Cuenta/i }));
 
 
     // Beneficio por edad
@@ -190,7 +190,7 @@ describe("<Registro />", () => {
     });
 
 
-    fireEvent.click(screen.getByRole("button", { name: /Regístrate/i }));
+    fireEvent.click(screen.getByRole("button", { name: /Crear Cuenta/i }));
 
 
     // Debe marcar error de duplicado y NO navegar NI alertar
@@ -220,7 +220,7 @@ describe("<Registro />", () => {
     });
 
 
-    fireEvent.click(screen.getByRole("button", { name: /Regístrate/i }));
+    fireEvent.click(screen.getByRole("button", { name: /Crear Cuenta/i }));
 
 
     // Se guarda el usuario

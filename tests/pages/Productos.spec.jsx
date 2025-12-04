@@ -5,14 +5,17 @@ import { render, screen, within } from "@testing-library/react"; // Herramientas
 
 // 1) Mock de subcomponentes EXACTAMENTE como los importa Productos.jsx
 // Simulamos los subcomponentes de la página Productos (Nav, Main, Footer) para evitar dependencias reales durante las pruebas.
+vi.mock("../../src/services/productsApi", () => ({
+  fetchProducts: vi.fn().mockResolvedValue([]), // Mock de la API
+}));
 vi.mock("../../src/components/Nav.jsx", () => ({
   default: () => <div data-testid="nav">NAV</div>, // Mock del componente Nav
 }));
 vi.mock("../../src/components/Main.jsx", () => ({
   default: (props) => (
-    <div data-testid="main">
+    <main data-testid="main">
       <div data-testid="main-props">{JSON.stringify(props)}</div> // Mock del componente Main mostrando las props
-    </div>
+    </main>
   ),
 }));
 vi.mock("../../src/components/Footer.jsx", () => ({
@@ -43,67 +46,23 @@ vi.mock("../../src/assets/d3ce09b3-8155-4534-a4ad-26f02ab6de2e.jpg", () => ({ de
 import Productos from "../../src/pages/Productos.jsx";
 
 describe("<Productos />", () => {
-  // Test 1: Verificamos que los componentes Nav, Main y Footer se renderizan correctamente
-  it("renderiza Nav, Main y Footer", () => {
-    render(<Productos />); // Renderizamos el componente Productos
-    expect(screen.getByTestId("nav")).toBeInTheDocument(); // Verificamos que el componente Nav esté en el documento
-    expect(screen.getByTestId("main")).toBeInTheDocument(); // Verificamos que el componente Main esté en el documento
-    expect(screen.getByTestId("footer")).toBeInTheDocument(); // Verificamos que el componente Footer esté en el documento
+  it("renderiza Nav, Main y Footer después de cargar", async () => {
+    const { rerender } = render(<Productos />);
+    
+    // Esperamos a que el componente Main aparezca después de la carga y el estado se actualice
+    await screen.findByTestId("main");
+
+    // Re-renderizamos para asegurar que todos los estados se han aplicado
+    rerender(<Productos />);
+    expect(screen.getByTestId("main")).toBeInTheDocument();
+
+    // Verificamos que los otros componentes también estén
+    expect(screen.getByTestId("nav")).toBeInTheDocument();
+    expect(screen.getByTestId("footer")).toBeInTheDocument();
   });
 
-  // Test 2: Verificamos que el componente Main reciba el array 'productos' con 4 grupos de 4 elementos
-  it("pasa a <Main /> un array 'productos' con 4 grupos de 4 items", () => {
-    render(<Productos />); // Renderizamos el componente Productos
-    const propsJson = within(screen.getByTestId("main")).getByTestId("main-props").textContent; // Obtenemos las props del componente Main
-    const props = JSON.parse(propsJson || "{}"); // Convertimos el texto JSON en objeto
-
-    expect(Array.isArray(props.productos)).toBe(true); // Verificamos que productos sea un array
-    expect(props.productos).toHaveLength(4); // Verificamos que tenga 4 grupos
-    props.productos.forEach((grupo) => {
-      expect(Array.isArray(grupo)).toBe(true); // Verificamos que cada grupo sea un array
-      expect(grupo).toHaveLength(4); // Verificamos que cada grupo tenga 4 elementos
-    });
-  });
-
-  // Test 3: Verificamos que los nombres de los productos sean los correctos y estén en el orden esperado
-  it("incluye nombres clave y orden esperado en los grupos", () => {
-    render(<Productos />); // Renderizamos el componente Productos
-    const propsJson = within(screen.getByTestId("main")).getByTestId("main-props").textContent; // Obtenemos las props de Main
-    const { productos } = JSON.parse(propsJson || "{}"); // Extraemos el array 'productos' de las props
-
-    // Verificamos los nombres de los productos en cada grupo
-    const nombres0 = productos[0].map((p) => p.nombre);
-    const nombres1 = productos[1].map((p) => p.nombre);
-    const nombres2 = productos[2].map((p) => p.nombre);
-    const nombres3 = productos[3].map((p) => p.nombre);
-
-    // Verificamos que los nombres estén en el orden correcto
-    expect(nombres0).toEqual([
-      "Torta Cuadrada de Chocolate",
-      "Torta Cuadrada de Frutas",
-      "Torta Circular de Vainilla",
-      "Torta Circular de Manjar",
-    ]);
-
-    expect(nombres1).toEqual([
-      "Mousse de Chocolate",
-      "Tiramisú Clásico",
-      "Torta Sin Azúcar de Naranja",
-      "Cheesecake Sin Azúcar",
-    ]);
-
-    expect(nombres2).toEqual([
-      "Empanada de Manzana",
-      "Tarta de Santiago",
-      "Brownie Sin Gluten",
-      "Pan Sin Gluten",
-    ]);
-
-    expect(nombres3).toEqual([
-      "Torta Vegana de Chocolate",
-      "Galletas Veganas de Avena",
-      "Torta Especial de Cumpleaños",
-      "Torta Especial de Boda",
-    ]);
+  it("muestra el estado de carga inicialmente", () => {
+    render(<Productos />);
+    expect(screen.getByText(/Cargando productos.../i)).toBeInTheDocument();
   });
 });

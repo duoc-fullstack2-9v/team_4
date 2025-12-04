@@ -1,38 +1,39 @@
 // src/services/usersApi.js
+import axios from 'axios';
 import { API_BASE_URL } from "./apiConfig";
 
 const USERS_URL = `${API_BASE_URL}/api/users`;
 
 export async function fetchUsers() {
-  const res = await fetch(USERS_URL);
-  if (!res.ok) {
+  try {
+    const response = await axios.get(USERS_URL);
+    return response.data;
+  } catch (error) {
+    console.error("Error al obtener usuarios", error);
     throw new Error("Error al obtener usuarios");
   }
-  return res.json();
 }
 
 export async function deleteUser(id) {
-  const res = await fetch(`${USERS_URL}/${id}`, {
-    method: "DELETE",
-  });
-
-  if (!res.ok) {
+  try {
+    await axios.delete(`${USERS_URL}/${id}`);
+  } catch (error) {
+    console.error("Error al eliminar usuario", error);
     throw new Error("Error al eliminar usuario");
   }
 }
 
 // Opcional: crear usuario
 export async function createUser(user) {
-  const res = await fetch(USERS_URL, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(user),
-  });
-
-  if (!res.ok) {
+  try {
+    const response = await axios.post(USERS_URL, user, {
+      headers: { "Content-Type": "application/json" },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error al crear usuario", error);
     throw new Error("Error al crear usuario");
   }
-  return res.json();
 }
 
 /**
