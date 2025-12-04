@@ -1,6 +1,6 @@
-
 import Hero from "./Hero"
 import ListaProductos from "./ListaProductos"
+import styles from "../styles/Index.module.css";
 
 function Main(props) {
 
@@ -10,7 +10,7 @@ function Main(props) {
         productosAgrupados.push(props.productos.slice(i, i + 4));
     }
 
-    return (<main>
+    return (<main className={styles.main}>
         {props.showHero && <Hero isLoggedIn={props.isLoggedIn} />}
         <ListaProductos productos={props.productos}></ListaProductos>
 

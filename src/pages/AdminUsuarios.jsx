@@ -4,6 +4,7 @@ import Nav from "../components/Nav";
 import Footer from "../components/Footer";
 import { fetchUsers, deleteUser } from "../services/usersApi";
 import { AuthContext } from '../context/AuthContext';
+import styles from "../styles/Index.module.css"
 
 function AdminUsuarios() {
   const { isLoggedIn } = useContext(AuthContext);
@@ -47,47 +48,54 @@ function AdminUsuarios() {
     }
   };
 
+  const handleAgregarUsuario = () => {
+    navigate("/Registro");  // Redirige a la página de registro
+  };
+
 
   return (
     <>
       <Nav />
-      <main className="contenedor-admin">
-        <h1>Administración de Usuarios</h1>
+      <main className={styles.main}>
+        <h1 className={styles.h1}>Administración de Usuarios</h1>
 
         {cargando && <p>Cargando usuarios...</p>}
-        {error && <p className="error">{error}</p>}
+        {error && <p className={styles.error}>{error}</p>}
 
         {!cargando && !error && (
-          <table className="tabla-admin">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Email</th>
-                <th>Acciones</th>
-              </tr>
-            </thead>
-            <tbody>
-              {usuarios.length === 0 ? (
+          <>
+            <table className={styles['tabla-admin']}>
+              <thead>
                 <tr>
-                  <td colSpan={4}>No hay usuarios registrados.</td>
+                  <th>ID</th>
+                  <th>Nombre</th>
+                  <th>Email</th>
+                  <th>Acciones</th>
                 </tr>
-              ) : (
-                usuarios.map((u) => (
-                  <tr key={u.id}>
-                    <td>{u.id}</td>
-                    <td>{u.nombre}</td>
-                    <td>{u.email}</td>
-                    <td>
-                      <button onClick={() => handleEliminar(u.id)}>
-                        Eliminar
-                      </button>
-                    </td>
+              </thead>
+              <tbody>
+                {usuarios.length === 0 ? (
+                  <tr>
+                    <td colSpan={4}>No hay usuarios registrados.</td>
                   </tr>
-                ))
-              )}
-            </tbody>
-          </table>
+                ) : (
+                  usuarios.map((u) => (
+                    <tr key={u.id}>
+                      <td>{u.id}</td>
+                      <td>{u.nombre}</td>
+                      <td>{u.email}</td>
+                      <td>
+                        <button className={styles.button} onClick={() => handleEliminar(u.id)}>
+                          Eliminar
+                        </button>
+                      </td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
+            <button onClick={handleAgregarUsuario} className={styles.btn}>Agregar Nuevo Usuario</button>
+          </>
         )}
       </main>
       <Footer />

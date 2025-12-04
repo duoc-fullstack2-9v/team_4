@@ -133,7 +133,7 @@ export default function Register() {
                         <small className={styles.msg}>{msg.confirm}</small> {/* Mensaje de validación para la confirmación de la contraseña */}
 
                         {/* Botón para enviar el formulario */}
-                        <button type="submit" className={styles.btn}>Regístrate</button>
+                        <button type="submit" className={styles.btn}>Crear Cuenta</button>
                     </form>
 
                     {/* Enlace para ir al login si ya tiene cuenta */}

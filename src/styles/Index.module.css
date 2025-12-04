@@ -1,6 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Pacifico&display=swap');
 
+/* === ESTILOS GLOBALES Y COMPARTIDOS === */
+
+.main {
+    background-color: #FFF5E1;
+    font-family: 'Lato';
+    padding: 20px;
+    min-height: calc(100vh - 140px); /* Ajusta según la altura de tu Nav y Footer */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
 .navbar {
     display: flex;
@@ -10,190 +21,190 @@
     background-color: #FFC0CB;
     font-family: 'Lato';
     color: #5D4037;
-
-    .nav_links {
-        display: flex;
-        gap: 5px;
-        list-style-type: none;
-    }
-
-    button {
-        background-color: #8B4513;
-        color: #FFF5E1;
-        border-radius: 35px;
-        padding: 10px;
-        border: 0;
-    }
 }
 
-
-
-main {
-    background-color: #FFF5E1;
-    font-family: 'Lato';
-
-    .hero {
-
-
-
-
-        h1 {
-            font-family: 'Pacifico';
-            color: #5D4037;
-            display: flex;
-            justify-content: center;
-            margin: 0px;
-            padding: 15px;
-        }
-
-
-
-
-        .btn {
-            margin: 50px;
-            background-color: #8B4513;
-            color: #FFF5E1;
-            padding: 15px;
-            border: 0;
-            text-decoration: none;
-        }
-
-
-        .hero_links {
-            display: flex;
-            justify-content: space-between;
-            /* Espacio entre los dos grupos */
-            align-items: center;
-            list-style-type: none;
-            margin: 0;
-            padding: 16px;
-        }
-
-        .leftLinks {
-            display: flex;
-            justify-content: flex-start;
-            /* Alinea los enlaces a la izquierda */
-        }
-
-        .rightLinks {
-            display: flex;
-            justify-content: flex-end;
-            /* Alinea los enlaces a la derecha */
-            gap: 10px;
-            /* Espacio entre los enlaces */
-        }
-
-        .contenedor_cuadrado {
-            display: flex;
-            justify-content: center;
-        }
-
-        .cuadrado_principal {
-            width: 90%;
-            height: 300px;
-            background-color: #FFC0CB;
-            display: flex;
-            justify-content: space-between;
-            padding: 1%;
-            margin: 30px;
-
-
-            .primera_mitad {
-                background-color: #FFC0CB;
-                width: 60%;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-            }
-        }
-    }
-
-    .productos {
-
-
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 20px;
-        justify-items: center;
-
-
-        h2 {
-            font-family: 'Pacifico';
-            color: #5D4037;
-            display: flex;
-            justify-content: center;
-            margin: 10px 0;
-            padding: 15px;
-            font-size: 1.2rem;
-        }
-
-        p {
-            color: #5D4037;
-            font-size: 0.9rem;
-            margin: 6px;
-        }
-
-        .unidad {
-            width: 100%;
-            max-width: 300px;
-            height: auto;
-            padding: 1%;
-            background-color: #FFC0CB;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin: 10px;
-
-            button {
-                margin: 0px;
-            }
-
-            p {
-                margin: 6px;
-            }
-
-            img {
-                width: 100%;
-                height: 50%;
-                object-fit: cover;
-            }
-        }
-
-    }
+.nav_links {
+    display: flex;
+    gap: 5px;
+    list-style-type: none;
 }
 
+/* === ESTILOS PÁGINA ADMINPRODUCTOS === */
 
+/* El .h1 de AdminProductos es diferente al del hero */
+.h1 { font-family: 'Pacifico', cursive; color: #5D4037; margin-bottom: 20px; }
 
+.tabla-admin {
+    width: 90%;
+    max-width: 1000px;
+    border-collapse: collapse;
+    margin: 20px 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
 
+.tabla-admin th,
+.tabla-admin td {
+    padding: 12px 15px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
 
+.tabla-admin th {
+    background-color: #FFC0CB;
+    color: #5D4037;
+    font-weight: 700;
+}
+
+.tabla-admin tr:nth-of-type(even) {
+    background-color: #fcf8f3;
+}
+
+.button {
+  background-color: #8B4513;
+  color: #FFF5E1;
+  padding: 8px 16px;
+  border-radius: 25px;
+  cursor: pointer;
+  text-align: center;
+  border: none;
+  font-size: 0.9rem;
+  transition: background-color 0.2s;
+}
+
+.button:hover {
+  background-color: #5D4037;
+}
+
+.error {
+  color: red;
+  font-size: 1rem;
+  text-align: center;
+  margin: 20px 0;
+}
+
+.btn {
+  background-color: #8B4513;
+  color: #FFF5E1;
+  padding: 12px 24px;
+  border-radius: 25px;
+  cursor: pointer;
+  text-align: center;
+  border: none;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-top: 20px;
+  transition: background-color 0.2s;
+}
+
+.btn:hover {
+  background-color: #5D4037;
+}
+
+/* === ESTILOS DE OTRAS PÁGINAS (Ej: Home/Index) === */
+
+.hero h1 {
+    font-family: 'Pacifico';
+    color: #5D4037;
+    display: flex;
+    justify-content: center;
+    margin: 0px;
+    padding: 15px;
+}
+
+.hero .btn {
+    margin: 50px;
+    background-color: #8B4513;
+    color: #FFF5E1;
+    padding: 15px;
+    border: 0;
+    text-decoration: none;
+}
+
+.hero_links {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style-type: none;
+    margin: 0;
+    padding: 16px;
+}
+
+.leftLinks {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.rightLinks {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.contenedor_cuadrado {
+    display: flex;
+    justify-content: center;
+}
+
+.cuadrado_principal {
+    width: 90%;
+    height: 300px;
+    background-color: #FFC0CB;
+    display: flex;
+    justify-content: space-between;
+    padding: 1%;
+    margin: 30px;
+}
+
+.primera_mitad {
+    background-color: #FFC0CB;
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.productos {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    justify-items: center;
+    width: 100%; /* Asegura que el grid ocupe el espacio */
+}
+
+.productos h2 { font-family: 'Pacifico'; color: #5D4037; display: flex; justify-content: center; margin: 10px 0; padding: 15px; font-size: 1.2rem; }
+.productos p { color: #5D4037; font-size: 0.9rem; margin: 6px; }
+
+.unidad { width: 100%; max-width: 300px; height: auto; padding: 1%; background-color: #FFC0CB; display: flex; flex-direction: column; align-items: center; margin: 10px; }
+.unidad button { margin: 0px; }
+.unidad p { margin: 6px; }
+.unidad img { width: 100%; height: 50%; object-fit: cover; }
+
+/* === ESTILOS DEL FOOTER === */
+
+footer { background-color: #8B4513; font-size: small; padding: 10px; }
+footer p { color: #B0BEC5; }
+footer a { color: #B0BEC5; }
+.footer_links { display: flex; align-items: center; }
+.footer_links li { margin: 20px; list-style-type: none; }
+.rojo { color: red; }
+
+/* --- Estilos anteriores que podrían ser de otras páginas (ya no se usan aquí) --- */
+/*
+.navbar {
+    display: flex;
+    align-content: center;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #FFC0CB;
+    font-family: 'Lato', sans-serif;
+    color: #5D4037;
+}
 
 footer {
     background-color: #8B4513;
     font-size: small;
     padding: 10px;
 
-    p {
-        color: #B0BEC5;
-    }
-
-    a {
-        color: #B0BEC5;
-    }
-
-    .footer_links {
-        display: flex;
-        align-items: center;
-
-        li {
-            margin: 20px;
-            list-style-type: none
-        }
-
-
-    }
-}
-
-
-.rojo {
-    color: red;
-}
+    p { color: #B0BEC5; }
+    a { color: #B0BEC5; }
+}*/

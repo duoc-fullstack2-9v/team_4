@@ -5,6 +5,7 @@ import Nav from "../components/Nav";
 import Footer from "../components/Footer";
 import { fetchProducts, deleteProduct } from "../services/productsApi"; // Eliminamos la función de crear producto
 import { AuthContext } from '../context/AuthContext';
+import styles from "../styles/Index.module.css"; // Aseguramos de importar el CSS correctamente
 
 function AdminProductos() {
   const { isLoggedIn } = useContext(AuthContext);  // Verificamos si el usuario está logueado
@@ -54,15 +55,15 @@ function AdminProductos() {
   return (
     <>
       <Nav />
-      <main className="contenedor-admin">
-        <h1>Administración de Productos</h1>
+      <main className={styles.main}>
+        <h1 className={styles.h1}>Administración de Productos</h1>
 
         {cargando && <p>Cargando productos...</p>}
-        {error && <p className="error">{error}</p>}
+        {error && <p className={styles.error}>{error}</p>}
 
         {!cargando && !error && (
           <>
-            <table className="tabla-admin">
+            <table className={styles['tabla-admin']}>
               <thead>
                 <tr>
                   <th>ID</th>
@@ -85,7 +86,7 @@ function AdminProductos() {
                       <td>{p.precio}</td>
                       <td>{p.stock}</td>
                       <td>
-                        <button onClick={() => handleEliminar(p.id)}>
+                        <button className={styles.button} onClick={() => handleEliminar(p.id)}>
                           Eliminar
                         </button>
                       </td>
@@ -96,7 +97,7 @@ function AdminProductos() {
             </table>
 
             {/* Botón para agregar un nuevo producto */}
-            <button onClick={handleAgregarProducto}>Agregar Nuevo Producto</button>
+            <button onClick={handleAgregarProducto} className={styles.btn}>Agregar Nuevo Producto</button>
           </>
         )}
       </main>
