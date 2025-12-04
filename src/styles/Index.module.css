@@ -61,11 +61,26 @@ main {
 
         .hero_links {
             display: flex;
-            flex-direction: row-reverse;
-            gap: 5px;
+            justify-content: space-between;
+            /* Espacio entre los dos grupos */
+            align-items: center;
             list-style-type: none;
             margin: 0;
             padding: 16px;
+        }
+
+        .leftLinks {
+            display: flex;
+            justify-content: flex-start;
+            /* Alinea los enlaces a la izquierda */
+        }
+
+        .rightLinks {
+            display: flex;
+            justify-content: flex-end;
+            /* Alinea los enlaces a la derecha */
+            gap: 10px;
+            /* Espacio entre los enlaces */
         }
 
         .contenedor_cuadrado {
@@ -174,7 +189,7 @@ footer {
             list-style-type: none
         }
 
-        
+
     }
 }
 

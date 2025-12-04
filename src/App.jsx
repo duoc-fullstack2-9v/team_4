@@ -6,6 +6,7 @@ import Login from './pages/Login.jsx'
 import Registro from "./pages/Registro.jsx"
 import AdminUsuarios from "./pages/AdminUsuarios.jsx";
 import AdminProductos from "./pages/AdminProductos.jsx";
+import AgregarProducto from "./pages/AgregarProducto.jsx";
 import { AuthProvider } from "./context/AuthContext.jsx";
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
           <Route path="/registro" element={<Registro />}></Route>
           <Route path="/adminUsuarios" element={<AdminUsuarios />}></Route>
           <Route path="/adminProductos" element={<AdminProductos />}></Route>
+          <Route path="/agregarProducto" element={<AgregarProducto />} />
         </Routes>
       </BrowserRouter>
     </AuthProvider>
