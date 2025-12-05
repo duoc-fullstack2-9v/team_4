@@ -1,4 +1,4 @@
-// tests/components/Hero.spec.jsx
+
 import React from "react";
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen } from "@testing-library/react";
@@ -7,7 +7,7 @@ import { AuthContext } from "../../src/context/AuthContext";
 
 
 
-// Mock del CSS Module EXACTAMENTE como lo importa el componente
+// Mock del CSS Module
 vi.mock("../../src/styles/Index.module.css", () => ({
   default: {
     hero: "hero",
@@ -28,7 +28,6 @@ vi.mock("../../src/components/HeroContent.jsx", () => ({
 }));
 
 // Importa el componente con la misma ruta que resolvimos arriba
-// (import dinámico para respetar el mock de arriba)
 const importHero = async () => (await import("../../src/components/Hero.jsx")).default;
 
 describe("<Hero />", () => {

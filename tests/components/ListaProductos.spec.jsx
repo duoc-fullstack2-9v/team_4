@@ -1,10 +1,10 @@
-// ListaProductos.test.jsx
+
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import { describe, it, expect, vi } from "vitest";
 import ListaProductos from "../../src/components/ListaProductos.jsx";
 
-// ⚠️ Mockeamos el CSS Module con el nombre esperado por el componente
+// Mockeamos el CSS Module
 vi.mock("../../src/styles/Index.module.css", () => ({
   default: {
     productos: "productos",

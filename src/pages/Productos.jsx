@@ -1,11 +1,10 @@
-// Importamos los componentes que se muestran en la página
+
 import { useState, useEffect } from "react";
-import Footer from "../components/Footer"; // Pie de página
-import Nav from "../components/Nav"; // Barra de navegación superior
-import Main from "../components/Main"; // Componente principal que mostrará los productos
+import Footer from "../components/Footer"; 
+import Nav from "../components/Nav"; 
+import Main from "../components/Main"; 
 import { fetchProducts } from "../services/productsApi";
 
-// Importamos todas las imágenes de los productos
 import torta2Chocolate from "../assets/torta cuadrada chocolate.jpg";
 import torta2Frutas from "../assets/torta cuadrada de frutas.jpg";
 import tortaOVainilla from "../assets/torta circular de vainilla.jpg";
@@ -23,7 +22,7 @@ import galletasAvena from "../assets/Galletas de Avena con 3 ingredientes - Loli
 import especialCumple from "../assets/356e6f80-7f65-4841-b8a3-bd4a43e74015.jpg";
 import especialBoda from "../assets/d3ce09b3-8155-4534-a4ad-26f02ab6de2e.jpg";
 
-// Componente principal de la página de productos
+
 function Productos() {
 
     const [productos, setProductos] = useState([]);
@@ -48,8 +47,6 @@ function Productos() {
         cargarProductos(); // Cargamos los productos cuando el componente se monta
     }, []);
 
-    // Estructura principal que se renderiza: Nav + Main + Footer
-    // Main recibe como prop el arreglo completo de productos
     return (
         <>
             <Nav /> {/* Barra de navegación superior */}
@@ -61,5 +58,5 @@ function Productos() {
     );
 }
 
-// Exportamos el componente para poder usarlo en App.jsx u otras rutas
+
 export default Productos;

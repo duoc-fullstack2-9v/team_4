@@ -1,10 +1,10 @@
 import { useEffect, useState, useContext } from "react";
-import { useNavigate } from "react-router-dom"; // Importamos useNavigate
+import { useNavigate } from "react-router-dom";
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
-import { fetchProducts, deleteProduct } from "../services/productsApi"; // Eliminamos la función de crear producto
+import { fetchProducts, deleteProduct } from "../services/productsApi";
 import { AuthContext } from '../context/AuthContext';
-import styles from "../styles/Index.module.css"; // Aseguramos de importar el CSS correctamente
+import styles from "../styles/Index.module.css";
 
 function AdminProductos() {
   const { isLoggedIn } = useContext(AuthContext);  // Verificamos si el usuario está logueado
@@ -112,7 +112,6 @@ function AdminProductos() {
               </tbody>
             </table>
 
-            {/* Botón para agregar un nuevo producto */}
             <button onClick={handleAgregarProducto} className={styles.btn}>Agregar Nuevo Producto</button>
           </>
         )}

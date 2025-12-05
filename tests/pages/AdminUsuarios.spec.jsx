@@ -69,8 +69,6 @@ describe('AdminUsuarios Page', () => {
       expect(deleteUser).toHaveBeenCalledWith(1);
     });
     
-    // Para verificar la actualización en la UI, podríamos re-mockear fetchUsers y re-renderizar,
-    // pero verificar la llamada a la API es una prueba más robusta y aislada.
   });
 
   it('debe navegar a la página de registro al hacer clic en "Agregar Nuevo Usuario"', async () => {

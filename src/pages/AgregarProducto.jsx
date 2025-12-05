@@ -1,4 +1,4 @@
-// src/pages/AgregarProducto.jsx
+
 import { useState } from 'react'; // Importamos hooks de React
 import styles from '../styles/Registro.module.css'; // Estilos de la página de agregar producto
 import { useNavigate } from 'react-router-dom'; // Para redirigir a otra página

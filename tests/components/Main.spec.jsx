@@ -1,9 +1,8 @@
-// tests/components/Main.spec.jsx
+
 import React from "react";
 import { describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 
-// ⚠️ Usa rutas LITERALES que coincidan con los imports reales del componente
 vi.mock("../../src/components/Hero.jsx", () => ({
   default: () => <div data-testid="hero">HERO</div>,
 }));
@@ -22,7 +21,7 @@ vi.mock("../../src/components/ListaProductos.jsx", () => ({
   },
 }));
 
-// Importar DESPUÉS de declarar los mocks
+// Importar despues de declarar los mocks
 import Main from "../../src/components/Main.jsx";
 
 describe("<Main />", () => {

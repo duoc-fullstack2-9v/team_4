@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 import styles from "../styles/Index.module.css";
-import Nav from '../components/Nav'; // Importar Nav y Footer para una página completa
+import Nav from '../components/Nav';
 import Footer from '../components/Footer';
-import { API_BASE_URL } from '../services/ApiConfig';
+import { API_BASE_URL } from '../services/apiConfig';
 
 function EditarProducto() {
   const { id } = useParams(); // Obtener el ID de la URL

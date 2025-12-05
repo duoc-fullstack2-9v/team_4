@@ -7,7 +7,7 @@ import { AuthContext } from '../../src/context/AuthContext';
 import { createProduct } from '../../src/services/productsApi';
 
 // Mock de la API de productos
-vi.mock('../../src/services/productsApi'); // Se mockea el módulo completo
+vi.mock('../../src/services/productsApi');
 
 // Mock de react-router-dom para la navegación
 const mockedNavigate = vi.fn();

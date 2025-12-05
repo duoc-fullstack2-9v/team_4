@@ -1,11 +1,11 @@
-// tests/pages/Registro.spec.jsx
+
 import React from "react";
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 
 
-// Mock del CSS Module EXACTO que importa Registro.jsx
+// Mock del CSS Module
 vi.mock("../../src/styles/Registro.module.css", () => ({
   default: {
     main: "main",
@@ -18,7 +18,7 @@ vi.mock("../../src/styles/Registro.module.css", () => ({
 }));
 
 
-// Mock de useNavigate, manteniendo el resto real (Link, etc.)
+// Mock de useNavigate
 const mockNavigate = vi.fn();
 vi.mock("react-router-dom", async () => {
   const actual = await vi.importActual("react-router-dom");

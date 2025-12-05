@@ -4,7 +4,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import styles from "../styles/Index.module.css";
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
-import { API_BASE_URL } from '../services/ApiConfig';
+import { API_BASE_URL } from '../services/apiConfig';
 
 
 function EditarUsuario() {

@@ -1,9 +1,9 @@
-// tests/components/Footer.spec.jsx
+
 import React from "react";
 import { describe, it, expect, vi } from "vitest";
 import { render, screen, within } from "@testing-library/react";
 
-// Mock del CSS Module EXACTO que importa el componente
+// Mock del CSS Module que importa el componente
 vi.mock("../../src/styles/Index.module.css", () => ({
   default: { footer: "footer" },
 }));

@@ -1,13 +1,13 @@
 import { useState, useContext } from 'react';
-import styles from '../styles/Login.module.css'; // Importamos los estilos de la página de login
-import { Link, useNavigate } from 'react-router-dom'; // Importamos Link para navegación y useNavigate para redirigir
+import styles from '../styles/Login.module.css'; 
+import { Link, useNavigate } from 'react-router-dom'; 
 import { useUsers } from '../components/utils'
 import { AuthContext } from '../context/AuthContext';
 // Definimos las claves para el almacenamiento en localStorage
 const LS_LOGGED_KEY = 'pms_logged_user';  // Clave para almacenar al usuario logueado
 
 
-// Componente principal del Login
+
 export default function Login({ onLogin }) {
   const users = useUsers(); // Obtenemos los usuarios desde el hook useUsers
   const [email, setEmail] = useState(''); // Estado para el correo electrónico

@@ -1,10 +1,10 @@
-// tests/components/Nav.spec.jsx
+
 import React from "react";
 import { describe, it, expect, vi } from "vitest";
 import { render, screen, within } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 
-// Mockea el CSS Module EXACTO que importa el componente
+// Mockea el CSS Module
 vi.mock("../../src/styles/Index.module.css", () => ({
   default: {
     navbar: "navbar",

@@ -1,11 +1,11 @@
-// Importamos los componentes que se utilizan en la página principal
+
 import { useState, useEffect } from "react";
-import Nav from "../components/Nav"; // Barra de navegación superior
-import Main from "../components/Main"; // Componente principal donde se muestran los productos
-import Footer from "../components/Footer"; // Pie de página
+import Nav from "../components/Nav";
+import Main from "../components/Main";
+import Footer from "../components/Footer";
 import { fetchProducts } from "../services/productsApi";
 
-// Importamos las imágenes de los productos
+
 import torta2Chocolate from "../assets/torta cuadrada chocolate.jpg";
 import torta2Frutas from "../assets/torta cuadrada de frutas.jpg";
 import tortaOVainilla from "../assets/torta circular de vainilla.jpg";
@@ -42,11 +42,6 @@ function Home({ isLoggedIn }) {
 
     const productosFiltrados = productos.slice(0, 8); // Obtener solo los primeros 8 productos
 
-
-    // Renderizamos los componentes de la página: 
-    // - Nav: barra de navegación
-    // - Main: componente donde se pasan los productos como prop
-    // - Footer: pie de página
     return (
         <>
             <Nav /> {/* Barra de navegación */}

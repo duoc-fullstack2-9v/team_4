@@ -1,10 +1,8 @@
-// tests/pages/Productos.spec.jsx
-import React from "react";
-import { describe, it, expect, vi } from "vitest"; // Importación de herramientas de test (describe, it, expect, vi)
-import { render, screen, within } from "@testing-library/react"; // Herramientas para renderizar y consultar la UI
 
-// 1) Mock de subcomponentes EXACTAMENTE como los importa Productos.jsx
-// Simulamos los subcomponentes de la página Productos (Nav, Main, Footer) para evitar dependencias reales durante las pruebas.
+import React from "react";
+import { describe, it, expect, vi } from "vitest";
+import { render, screen, within } from "@testing-library/react";
+
 vi.mock("../../src/services/productsApi", () => ({
   fetchProducts: vi.fn().mockResolvedValue([]), // Mock de la API
 }));
@@ -22,7 +20,7 @@ vi.mock("../../src/components/Footer.jsx", () => ({
   default: () => <div data-testid="footer">FOOTER</div>, // Mock del componente Footer
 }));
 
-// 2) Mock de TODAS las imágenes importadas
+// 2) Mock de las imágenes importadas
 // Simulamos las imágenes para evitar que se carguen realmente en las pruebas.
 vi.mock("../../src/assets/torta cuadrada chocolate.jpg", () => ({ default: "mock://torta-choco.jpg" }));
 vi.mock("../../src/assets/torta cuadrada de frutas.jpg", () => ({ default: "mock://torta-frutas.jpg" }));
@@ -41,8 +39,6 @@ vi.mock("../../src/assets/Galletas de Avena con 3 ingredientes - Loli….jpg", (
 vi.mock("../../src/assets/356e6f80-7f65-4841-b8a3-bd4a43e74015.jpg", () => ({ default: "mock://especial-cumple.jpg" }));
 vi.mock("../../src/assets/d3ce09b3-8155-4534-a4ad-26f02ab6de2e.jpg", () => ({ default: "mock://especial-boda.jpg" }));
 
-// 3) Importa la página DESPUÉS de definir los mocks
-// Importamos la página Productos luego de haber mockeado los subcomponentes e imágenes para evitar efectos colaterales
 import Productos from "../../src/pages/Productos.jsx";
 
 describe("<Productos />", () => {

@@ -1,4 +1,4 @@
-// src/services/usersApi.js
+
 import axios from 'axios';
 import { API_BASE_URL } from "./apiConfig";
 
@@ -23,7 +23,7 @@ export async function deleteUser(id) {
   }
 }
 
-// Opcional: crear usuario
+//crear usuario
 export async function createUser(user) {
   try {
     const response = await axios.post(USERS_URL, user, {
@@ -37,12 +37,9 @@ export async function createUser(user) {
 }
 
 /**
- * Valida las credenciales de un usuario contra la lista de usuarios de la API.
- * **Nota de seguridad:** Este método no es seguro para producción. La validación
- * de contraseñas debe realizarse en el backend.
- * @param {string} email - El email del usuario.
- * @param {string} password - La contraseña del usuario.
- * @returns {Promise<object|undefined>} El usuario si se encuentra, o undefined.
+ * @param {string} email  //El email del usuario.
+ * @param {string} password // La contraseña del usuario.
+ * @returns {Promise<object|undefined>} //El usuario si se encuentra, o undefined.
  */
 export async function loginUser(email, password) {
   const users = await fetchUsers();

@@ -1,4 +1,4 @@
-// src/context/AuthContext.js
+
 import React, { createContext, useState, useEffect } from 'react';
 
 // 1. Crear el contexto de autenticación

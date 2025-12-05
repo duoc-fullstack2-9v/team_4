@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from "react";
-import { useNavigate } from "react-router-dom"; // Importar useNavigate
+import { useNavigate } from "react-router-dom";
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
 import { fetchUsers, deleteUser } from "../services/usersApi";
@@ -11,7 +11,7 @@ function AdminUsuarios() {
   const [usuarios, setUsuarios] = useState([]);
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState(null);
-  const navigate = useNavigate(); // Hook para la navegación
+  const navigate = useNavigate();
 
   // Función para redirigir a la página de editar usuario
   const handleEditarUsuario = (id) => {
