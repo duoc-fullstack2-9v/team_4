@@ -4,6 +4,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import styles from "../styles/Index.module.css";
 import Nav from '../components/Nav'; // Importar Nav y Footer para una página completa
 import Footer from '../components/Footer';
+import { API_BASE_URL } from '../services/ApiConfig';
 
 function EditarProducto() {
   const { id } = useParams(); // Obtener el ID de la URL
@@ -15,7 +16,7 @@ function EditarProducto() {
     if (!id) return;
 
     // Cargar el producto por ID
-    axios.get(`/api/products/${id}`)
+    axios.get(`${API_BASE_URL}/api/products/${id}`)
       .then(response => setProducto(response.data))
       .catch(error => {
         console.error("Error al cargar el producto:", error);
@@ -39,7 +40,7 @@ function EditarProducto() {
   console.log('ID del producto:', id);
   console.log('Datos del producto a actualizar:', producto);
 
-  axios.put(`/api/products/${id}`, producto)
+  axios.put(`${API_BASE_URL}/api/products/${id}`, producto)
     .then(response => {
       console.log('Producto actualizado:', response.data);
       alert('Producto actualizado correctamente');

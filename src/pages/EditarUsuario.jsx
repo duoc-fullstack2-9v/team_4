@@ -4,6 +4,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 import styles from "../styles/Index.module.css";
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
+import { API_BASE_URL } from '../services/ApiConfig';
+
 
 function EditarUsuario() {
   const { id } = useParams();
@@ -14,7 +16,7 @@ function EditarUsuario() {
   useEffect(() => {
     if (!id) return;
 
-    axios.get(`/api/users/${id}`)
+    axios.get(`${API_BASE_URL}/api/users/${id}`)
       .then(response => setUsuario(response.data))
       .catch(error => {
         console.error("Error al cargar el usuario:", error);
@@ -33,7 +35,7 @@ function EditarUsuario() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.put(`/api/users/${id}`, usuario)
+    axios.put(`${API_BASE_URL}/api/users/${id}`, usuario)
       .then(response => {
         alert('Usuario actualizado correctamente');
         navigate('/adminUsuarios');

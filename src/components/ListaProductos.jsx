@@ -1,6 +1,5 @@
 import React from "react";
-import styles from "../styles/Index.module.css"; // Asegúrate de que el archivo CSS está correctamente importado
-
+import styles from "../styles/Index.module.css";
 function ListaProductos({ productos }) {
   // Verifica si 'props.productos' es un arreglo antes de usar map()
   if (!Array.isArray(productos)) {
