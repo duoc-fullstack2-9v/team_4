@@ -83,3 +83,21 @@ input:focus{
   margin-top: 2px;
   display: block;
 }
+
+textarea {
+  width: 100%; /* El ancho se adapta al contenedor */
+  height: 80px; /* Establecemos una altura fija */
+  resize: none;  /* Deshabilitamos la opción de redimensionar */
+  padding: 12px 2px;
+  border-radius: 8px;
+  font-size: 16px;
+  outline: none;
+  font-family: Arial, sans-serif;
+  border:1px solid #d9c7a8;
+}
+
+textarea::placeholder{color:#b7b7b7;}
+textarea:focus{
+  border-color:var(--rosa);
+  box-shadow:0 0 0 3px rgba(255,192,203,.35);
+}
